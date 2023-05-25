@@ -1,0 +1,7 @@
+40823 Ana_Gonzalez 25684 Gerente_de_ventas
+67329 Juan_Rodriguez 78923 Analista_de_sistemas
+93726 Laura_Sanchez 36547 Coordinadora_de_proyectos
+24581 Carlos_Perez 15264 Jefe_de_compras
+56137 María_Lopez 98765 Encargada_de_marketing
+87459 Andrea_Hernandez 36987 Especialista_en_recursos_humanos
+63948 Luis_Garcia 58246 Analista_financiero
