@@ -39,12 +39,24 @@ int main(int argc, char const *argv[])
     cout << "Luis David Flores Martinez" << endl;
     srand(time(0));
     Escuela morelos[TAM];
-    llenarDatos(morelos);
-    // llenarAleatorios(morelos);
+    int llenado;
     int opc;
     do
     {
-        cout << "\nQue deseas hacer?\n1.-Alumnos\n2.-Maestros\n3.-Secretarios\n4.-Todos\n5.-Salir\nOpcion:  ";
+        cout << "Forma de llenado\n1.-Manual\n2.-Aleatoria\nOpcion: ";
+        cin >> llenado;
+    } while (llenado < 1 || llenado >2);
+    
+    if (llenado == 1)
+    {
+        llenarDatos(morelos);
+    }else{
+        llenarAleatorios(morelos);
+    }
+    
+    do
+    {
+        cout << "\nQue deseas imprimir?\n1.-Alumnos\n2.-Maestros\n3.-Secretarios\n4.-Todos\n5.-Salir\nOpcion:  ";
         cin >> opc;
         switch (opc)
         {
