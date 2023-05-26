@@ -29,7 +29,7 @@ struct Escuela
     Tipo tp;
 };
 
-void llenardatos(Escuela morelos[TAM]);
+void llenarDatos(Escuela morelos[TAM]);
 void llenarAleatorios(Escuela morelos[TAM]);
 void imprimirTp(Escuela morelos[TAM], int tipo);
 void imprimir(Escuela morelos[TAM]);
@@ -39,8 +39,8 @@ int main(int argc, char const *argv[])
     cout << "Luis David Flores Martinez" << endl;
     srand(time(0));
     Escuela morelos[TAM];
-    llenardatos(morelos);
-    llenarAleatorios(morelos);
+    llenarDatos(morelos);
+    // llenarAleatorios(morelos);
     int opc;
     do
     {
@@ -67,16 +67,18 @@ int main(int argc, char const *argv[])
             cout << "\nImprimiendo Todos..." << endl;
             imprimir(morelos);
             break;
+        case 5:
+        break;
 
         default:
-            cout << "\nOpcion incorrcta";
+            cout << "\nOpcion incorrecta";
             break;
         }
     } while (opc != 5 || (opc < 1 || opc > 5));
 
     return 0;
 }
-void llenardatos(Escuela morelos[TAM])
+void llenarDatos(Escuela morelos[TAM])
 {
     int per = 0;
     cout << "Llenando los datos del arreglo..." << endl;
