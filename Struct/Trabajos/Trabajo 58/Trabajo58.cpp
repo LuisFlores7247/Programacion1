@@ -29,17 +29,51 @@ struct Escuela
     Tipo tp;
 };
 
+void llenardatos(Escuela morelos[TAM]);
 void llenarAleatorios(Escuela morelos[TAM]);
+void imprimirTp(Escuela morelos[TAM], int tipo);
 void imprimir(Escuela morelos[TAM]);
 
 int main(int argc, char const *argv[])
 {
+    cout << "Luis David Flores Martinez" << endl;
     srand(time(0));
     Escuela morelos[TAM];
-
-    imprimir(morelos);
+    llenardatos(morelos);
     llenarAleatorios(morelos);
-    imprimir(morelos);
+    int opc;
+    do
+    {
+        cout << "\nQue deseas hacer?\n1.-Alumnos\n2.-Maestros\n3.-Secretarios\n4.-Todos\n5.-Salir\nOpcion:  ";
+        cin >> opc;
+        switch (opc)
+        {
+        case ALUMNOS:
+            cout << "\nImprimiendo Alumnos..." << endl;
+            imprimirTp(morelos, opc);
+
+            break;
+        case MAESTROS:
+            cout << "\nImprimiendo Maestros..." << endl;
+            imprimirTp(morelos, opc);
+
+            break;
+        case SECRETARIOS:
+            cout << "\nImprimiendo Secretarios..." << endl;
+            imprimirTp(morelos, opc);
+
+            break;
+        case 4:
+            cout << "\nImprimiendo Todos..." << endl;
+            imprimir(morelos);
+            break;
+
+        default:
+            cout << "\nOpcion incorrcta";
+            break;
+        }
+    } while (opc != 5 || (opc < 1 || opc > 5));
+
     return 0;
 }
 void llenardatos(Escuela morelos[TAM])
@@ -88,67 +122,74 @@ void llenardatos(Escuela morelos[TAM])
     }
 }
 
-void llenarAleatorios(Escuela morelos[TAM])
+void llenarAleatorios(Escuela Morelos[TAM])
 {
-    char nombres[15][30] = {
-        "Juan", "Maria", "Carlos", "Ana", "Pedro", "Laura",
-        "Luis", "Sofia", "Miguel", "Lucia", "Diego", "Valeria",
-        "Javier", "Camila", "Ricardo"};
 
-    char direcciones[15][40] = {
-        "Calle Principal, Ciudad A", "Avenida Central, Ciudad B", "Calle 10, Ciudad C",
-        "Avenida 5, Ciudad D", "Calle Mayor, Ciudad E", "Avenida del Sol, Ciudad F",
-        "Calle 20, Ciudad G", "Avenida Principal, Ciudad H", "Calle 7, Ciudad I",
-        "Avenida Norte, Ciudad J", "Calle 15, Ciudad K", "Avenida Sur, Ciudad L",
-        "Calle 12, Ciudad M", "Avenida Oeste, Ciudad N", "Calle 18, Ciudad O"};
+    int aux, aleatorio1, aleatorio2;
 
-    char telefonos[15][11] = {
-        "1234567890", "9876543210", "5551234567",
-        "9998887777", "1112223333", "4445556666",
-        "7778889999", "2223334444", "8887776666",
-        "5554443333", "1119998888", "6667778888",
-        "3332221111", "9990001111", "4445556666"};
+    char nom[20][30] = {"Alejandro ", "Luci ", "Victor ", "Anabel ", "Pablo ", "Gaby ", "Patricio ", "Rocio ", "Cristobal ", "Flor ", "Mario ", "Johana ", "Daniel ", "Dulce ", "Angel ", "Miranda ", "Esteban ", "Vanessa", "Alberto ", "Julia "};
+    char apellidos[20][30] = {"Barba", "Delgado", "Diaz", "Jimenez", "Avila", "Alva", "Hernandez", "Garcia", "Martinez", "Lopez", "Gonzalez", "Perez", "Rodriguez", "Sanchez", "Cruz", "Ramirez", "Flores", "Gomez", "salazar", "comte"};
+    char direcciones[22][40] = {"lima", "peru", "dorado", "navarrete", "lopez mateos", "golondrinas", "argentina", "montevideo", "campeche", "paris", "londres", "sierra nevada", "montes apalaches", "sierra pintada", "avenida universidad", "circunvalacion sur", "circunvalacion norte", "madero", "centro", "nieto", "allende", "victoria"};
 
-    int opc;
-    char telefono[11];
-    float prom;
+    cout << "Generando datos aleatoriamente ... ";
     for (int i = 0; i < TAM; i++)
     {
-        opc = rand() % 3;
-        switch (opc)
+
+        aleatorio1 = 0 + rand() % (19 - 0 + 1);
+        aleatorio2 = 0 + rand() % (19 - 0 + 1);
+
+        strcpy(Morelos[i].nombre, "");
+        strcpy(Morelos[i].direccion, "");
+        strcpy(Morelos[i].telefono, "");
+        // colocar nombre
+        strcat(Morelos[i].nombre, nom[aleatorio1]);
+        strcat(Morelos[i].nombre, apellidos[aleatorio2]);
+        // cout<<endl<<Morelos[i].nombre;
+
+        // colocar direccion
+        aleatorio1 = 0 + rand() % (21 - 0 + 1);
+        aleatorio2 = 100 + rand() % (999 - 100 + 1); // aleatorio para el numero de la calle
+
+        strcat(Morelos[i].direccion, direcciones[aleatorio1]);
+        // cout<<endl<<Morelos[i].direccion;
+
+        // colocar telefono
+        aleatorio1 = 1000000 + rand() % (1200000 - 1000000 + 1);
+        itoa(aleatorio1, Morelos[i].telefono, 10);
+        // cout<<endl<<Morelos[i].telefono;
+
+        aux = 1 + rand() % (3 - 1 + 1); // aleatorio para el tipo de persona
+
+        switch (aux)
         {
         case ALUMNOS:
-            morelos[i].tp = ALUMNOS;
-            strcpy(morelos[i].nombre, nombres[rand() % 15]);
-            strcpy(morelos[i].direccion, direcciones[rand() % 15]);
-            strcpy(morelos[i].telefono, telefonos[rand() % 15]);
-            morelos[i].aux.promedio = 1.0 + (rand() / (RAND_MAX / 9.0));
+            Morelos[i].tp = ALUMNOS;
+            // generando promedio aleatoriamente
+            aleatorio1 = 6 + rand() % (10 - 6 + 1);   // para parte entera
+            aleatorio2 = 10 + rand() % (99 - 10 + 1); // para los decimales
+
+            Morelos[i].aux.promedio = aleatorio1 + aleatorio2 / 100.0;
             break;
+
         case MAESTROS:
-            morelos[i].tp = MAESTROS;
-            strcpy(morelos[i].nombre, nombres[rand() % 15]);
-            strcpy(morelos[i].direccion, direcciones[rand() % 15]);
-            strcpy(morelos[i].telefono, telefonos[rand() % 15]);
-            morelos[i].aux.salario = 7500.0 + (rand() / (RAND_MAX / 30000.0));
+            Morelos[i].tp = MAESTROS;
+            // generando salario aleatoriamente
+            Morelos[i].aux.salario = 1200 + rand() % (15000 - 1200 + 1);
             break;
+
         case SECRETARIOS:
-            morelos[i].tp = SECRETARIOS;
-            strcpy(morelos[i].nombre, nombres[rand() % 15]);
-            strcpy(morelos[i].direccion, direcciones[rand() % 15]);
-            strcpy(morelos[i].telefono, telefonos[rand() % 15]);
-            morelos[i].aux.compensaciones = 7500.0 + (rand() / (RAND_MAX / 30000.0));
+            Morelos[i].tp = SECRETARIOS;
+            // generando compensacion aleatoriamente
+            Morelos[i].aux.compensaciones = 600 + rand() % (1500 - 600 + 1);
             break;
-        default:
-            break;
-        }
-    }
-}
+        } // fin switch
+    }     // fin de for
+} // fin de funcion llenar
 
 void imprimir(Escuela morelos[TAM])
 {
     for (int i = 0; i < TAM; i++)
     {
-        cout << "Escuela " << i + 1 << endl;
         cout << "Nombre: " << morelos[i].nombre << endl;
         cout << "Direccion: " << morelos[i].direccion << endl;
         cout << "Telefono: " << morelos[i].telefono << endl;
@@ -172,5 +213,38 @@ void imprimir(Escuela morelos[TAM])
         }
 
         cout << endl;
+    }
+}
+void imprimirTp(Escuela morelos[TAM], int tipo)
+{
+    for (int i = 0; i < TAM; i++)
+    {
+        if (morelos[i].tp == tipo)
+        {
+            cout << "Escuela " << i + 1 << endl;
+            cout << "Nombre: " << morelos[i].nombre << endl;
+            cout << "Direccion: " << morelos[i].direccion << endl;
+            cout << "Telefono: " << morelos[i].telefono << endl;
+
+            switch (morelos[i].tp)
+            {
+            case ALUMNOS:
+                cout << "Tipo: Alumnos" << endl;
+                cout << "Promedio: " << morelos[i].aux.promedio << endl;
+                break;
+            case MAESTROS:
+                cout << "Tipo: Maestros" << endl;
+                cout << "Salario: " << morelos[i].aux.salario << endl;
+                break;
+            case SECRETARIOS:
+                cout << "Tipo: SecretariOs" << endl;
+                cout << "Compensaciones: " << morelos[i].aux.compensaciones << endl;
+                break;
+            default:
+                break;
+            }
+
+            cout << endl;
+        }
     }
 }
